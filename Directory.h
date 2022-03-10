@@ -32,7 +32,8 @@ class Directory : public Core
  public:
   std::string name;
   std::string fhandle;
-  Dirent the_chunk;
+  Dirent chunk1;
+  Dirent chunk2;
   std::vector<Dirent *> *dirent_vector_ptr;
   Directory(std::string, std::string, std::string,
 	    std::string);

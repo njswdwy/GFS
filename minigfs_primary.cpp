@@ -85,7 +85,7 @@ Myminigfs_Server::CommitAbort
 
   std::cout<<"Prime_Replica CommitAbort!"<<std::endl;
 
-  if (fhandle != "00000002") // inode 2 is the root PS: 我不确定这个if条件是啥。。。
+  if (fhandle != "00000002")
     {
       result["status"] = "GFSERR_STALE";
     }
@@ -175,7 +175,7 @@ main()
    mounted = (&NFS_root);
 
   Replica GFS_primaryReplica
-  { "http://169.237.6.102", "1234567890", "Replica", "00000001", "This is Prime_Replica!"};
+  { "http://169.237.6.102", "1234567890", "Replica", "00000001", "This is Prime_Chunk1", "This is Prime_Chunk2"};
 
     replica = (&GFS_primaryReplica);
 

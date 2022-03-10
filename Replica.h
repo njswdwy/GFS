@@ -25,12 +25,14 @@ class Replica : public Core
   std::string name;
   std::string fhandle;
   std::string chunk_index;
-  Chunk committed_data;
-  Chunk uncommitted_data;
+  Chunk committed_data_chunk1;
+  Chunk committed_data_chunk2;
+  Chunk uncommitted_data_chunk1;
+  Chunk uncommitted_data_chunk2;
   Replica(std::string, std::string, std::string,
 	  std::string);
   Replica(std::string, std::string, std::string,
-	  std::string, std::string);
+	  std::string, std::string, std::string);
   virtual Json::Value PushChunk2Replica(std::string, std::string, std::string, std::string);
   virtual Json::Value CommitAbort(std::string, std::string, std::string, std::string);
   virtual Json::Value * dumpJ();

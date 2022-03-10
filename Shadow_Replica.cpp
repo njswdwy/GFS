@@ -14,7 +14,7 @@ Shadow_Replica::Shadow_Replica
  std::string arg_object_id)
   : Replica { arg_host_url, arg_vsID, arg_class_id, arg_object_id }
 {
-  std::cout << "Shadow created" << std::endl;
+  std::cout << "Shadow replica created" << std::endl;
 }
 
 Json::Value

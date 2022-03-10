@@ -159,9 +159,22 @@ main()
 
   mounted = (&GFS_root);
 
-  (mounted->the_chunk).chunk_url_primary = "http://127.0.0.1:8300";
-  (mounted->the_chunk).chunk_url_secondary_A = "http://127.0.0.1:8301";
-  (mounted->the_chunk).chunk_url_secondary_B = "http://127.0.0.1:8302";
+  // chunk 1 setup
+    (mounted->chunk1).chunk_url_primary = "http://127.0.0.1:8300";
+    (mounted->chunk1).chunk_url_secondary_A = "http://127.0.0.1:8301";
+    (mounted->chunk1).chunk_url_secondary_B = "http://127.0.0.1:8302";
+
+  // chunk 2 setup
+    (mounted->chunk2).chunk_url_primary = "http://127.0.0.1:8300";
+    (mounted->chunk2).chunk_url_secondary_A = "http://127.0.0.1:8301";
+    (mounted->chunk2).chunk_url_secondary_B = "http://127.0.0.1:8302";
+
+
+
+
+//  (mounted->the_chunk).chunk_url_primary = "http://127.0.0.1:8300";
+//  (mounted->the_chunk).chunk_url_secondary_A = "http://127.0.0.1:8301";
+//  (mounted->the_chunk).chunk_url_secondary_B = "http://127.0.0.1:8302";
 
   HttpServer httpserver(8384);
   Myminigfs_Server s(httpserver,

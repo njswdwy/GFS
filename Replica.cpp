@@ -51,17 +51,18 @@ Replica::Replica
   : Core { core_arg_host_url, core_arg_owner_vsID,
     core_arg_class_id, core_arg_object_id }
 {
-  std::cout << "a shadow has been created" << std::endl;
+  std::cout << "a replica has been created" << std::endl;
 }
 
 Replica::Replica
 (std::string core_arg_host_url, std::string core_arg_owner_vsID,
  std::string core_arg_class_id, std::string core_arg_object_id,
- std::string arg_data)
+ std::string arg_chunk1_data, std::string arg_chunk2_data)
   : Core { core_arg_host_url, core_arg_owner_vsID,
     core_arg_class_id, core_arg_object_id }
 {
-  (this->committed_data).data = arg_data;
+  (this->committed_data_chunk1).data = arg_chunk1_data;
+  (this->committed_data_chunk2).data = arg_chunk2_data;
 }
 
 Json::Value
@@ -71,12 +72,19 @@ Replica::CommitAbort
 {
   Json::Value result;
   //
-  if (arg_commitorabort == "commit")
-  {(this->committed_data).data  = (this->uncommitted_data).data;
-    result["status"] = "committed";
-    result["data"] = (this->committed_data).data;
+  if (arg_commitorabort == "commit"){
+      if (arg_chunk_index == "0"){
+          this->committed_data_chunk1.data = this->uncommitted_data_chunk1.data;
+      } else {
+          this->committed_data_chunk2.data = this->uncommitted_data_chunk2.data;
+      }
+      result["status"] = "committed";
   }
 
+//  {(this->committed_data).data  = (this->uncommitted_data).data;
+//    result["status"] = "committed";
+//    result["data"] = (this->committed_data).data;
+//  }
   return result;
 }
 
@@ -86,7 +94,14 @@ Replica::PushChunk2Replica
 {
   Json::Value result;
 
-  (this->uncommitted_data).data = arg_chunk;
+  std::string chunk_index = arg_chunk_index;
+  if (chunk_index == "0"){
+      this->uncommitted_data_chunk1.data = arg_chunk;
+  } else{
+      this->uncommitted_data_chunk2.data = arg_chunk;
+  }
+
+//  (this->uncommitted_data).data = arg_chunk;
   result["vote"] = "commit";
   return result;
 }

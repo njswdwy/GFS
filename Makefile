@@ -14,7 +14,7 @@ CFLAGS = -g -I/usr/include/jsoncpp
 # CFLAGS = -O3
 
 # the following, RPCG, are JSONRPC generated files
-RPCG_INCS =	minigfs_client.h minigfs_server.h
+RPCG_INCS =	minigfs_client1.h minigfs_client2.h minigfs_server.h
 
 # all files inherited from Core objects plus the RPCG stuff
 CORE_INCS =	Core.h Directory.h Shadow_Directory.h Replica.h Shadow_Replica.h $(RPCG_INCS)
@@ -57,7 +57,7 @@ Replica.o:		Replica.cpp $(CORE_INCS)
 Shadow_Replica.o:	Shadow_Replica.cpp $(CORE_INCS)
 	$(CC) -c $(CFLAGS) Shadow_Replica.cpp
 
-minigfs_client.o:	minigfs_client.cpp $(CORE_INCS)
+minigfs_client.o:	minigfs_client1.cpp $(CORE_INCS)
 	$(CC) -c $(CFLAGS) minigfs_client.cpp
 
 minigfs_master.o:	minigfs_master.cpp $(CORE_INCS)

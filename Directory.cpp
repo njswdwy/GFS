@@ -81,9 +81,21 @@ Directory::ObtainChunkURL
 (std::string arg_name, std::string arg_fhandle, std::string arg_chunk_index)
 {
   Json::Value result;
-  result["primary"]      = (this->the_chunk).chunk_url_primary;
-  result["secondary_A"]  = (this->the_chunk).chunk_url_secondary_A;
-  result["secondary_B"]  = (this->the_chunk).chunk_url_secondary_B;
+  std::string chunk_index = arg_chunk_index;
+  if (chunk_index == "0"){
+      result["primary"]      = (this->chunk1).chunk_url_primary;
+      result["secondary_A"]  = (this->chunk1).chunk_url_secondary_A;
+      result["secondary_B"]  = (this->chunk1).chunk_url_secondary_B;
+  } else{
+      result["primary"]      = (this->chunk2).chunk_url_primary;
+      result["secondary_A"]  = (this->chunk2).chunk_url_secondary_A;
+      result["secondary_B"]  = (this->chunk2).chunk_url_secondary_B;
+  }
+
+
+//  result["primary"]      = (this->the_chunk).chunk_url_primary;
+//  result["secondary_A"]  = (this->the_chunk).chunk_url_secondary_A;
+//  result["secondary_B"]  = (this->the_chunk).chunk_url_secondary_B;
   result["status"] = "URLpassed";
   return result;
 }

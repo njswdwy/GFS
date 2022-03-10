@@ -14,7 +14,7 @@ Shadow_Directory::Shadow_Directory
  std::string arg_object_id)
   : Directory { arg_host_url, arg_vsID, arg_class_id, arg_object_id }
 {
-  std::cout << "Shadow created" << std::endl;
+  std::cout << "Shadow directory created" << std::endl;
 }
 
 Json::Value
