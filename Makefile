@@ -25,16 +25,19 @@ LDFLAGS_SV = 	-ljsoncpp -lmicrohttpd -ljsonrpccpp-common -ljsonrpccpp-server
 LDFLAGS_CL = 	-ljsoncpp -lcurl -ljsonrpccpp-common -ljsonrpccpp-client
 
 # executable
-EXE_FILES =	minigfs_client minigfs_master minigfs_primary minigfs_secondary_A minigfs_secondary_B
+EXE_FILES =	minigfs_client1 minigfs_client2  minigfs_master minigfs_primary minigfs_secondary_A minigfs_secondary_B
 
 # rules
 
-all: 	minigfs_client minigfs_master minigfs_primary minigfs_secondary_A minigfs_secondary_B
+all: 	minigfs_client1 minigfs_client2 minigfs_master minigfs_primary minigfs_secondary_A minigfs_secondary_B
 
 # why do I need this line?
 
-minigfs_client.h:	minigfs.json
-	jsonrpcstub minigfs.json --cpp-server=minigfs_Server --cpp-client=minigfs_Client
+minigfs_client1.h:	minigfs.json
+	jsonrpcstub minigfs.json --cpp-server=minigfs_Server --cpp-client=minigfs_Client1
+
+minigfs_client2.h:	minigfs.json
+	jsonrpcstub minigfs.json --cpp-server=minigfs_Server --cpp-client=minigfs_Client2
 
 minigfs_server.h:	minigfs.json
 	jsonrpcstub minigfs.json --cpp-server=minigfs_Server --cpp-client=minigfs_Client
@@ -57,8 +60,11 @@ Replica.o:		Replica.cpp $(CORE_INCS)
 Shadow_Replica.o:	Shadow_Replica.cpp $(CORE_INCS)
 	$(CC) -c $(CFLAGS) Shadow_Replica.cpp
 
-minigfs_client.o:	minigfs_client1.cpp $(CORE_INCS)
-	$(CC) -c $(CFLAGS) minigfs_client.cpp
+minigfs_client1.o:	minigfs_client1.cpp $(CORE_INCS)
+	$(CC) -c $(CFLAGS) minigfs_client1.cpp
+
+minigfs_client2.o:	minigfs_client2.cpp $(CORE_INCS)
+	$(CC) -c $(CFLAGS) minigfs_client2.cpp
 
 minigfs_master.o:	minigfs_master.cpp $(CORE_INCS)
 	$(CC) -c $(CFLAGS) minigfs_master.cpp
@@ -72,8 +78,11 @@ minigfs_secondary_A.o:	minigfs_secondary_A.cpp $(CORE_INCS)
 minigfs_secondary_B.o:	minigfs_secondary_B.cpp $(CORE_INCS)
 	$(CC) -c $(CFLAGS) minigfs_secondary_B.cpp
 
-minigfs_client:		$(CORE_OBJS) minigfs_client.o base64.o
-	$(CC) -o minigfs_client $(CORE_OBJS) minigfs_client.o base64.o $(LDFLAGS_SV) $(LDFLAGS_CL)
+minigfs_client1:		$(CORE_OBJS) minigfs_client1.o base64.o
+	$(CC) -o minigfs_client1 $(CORE_OBJS) minigfs_client1.o base64.o $(LDFLAGS_SV) $(LDFLAGS_CL)
+
+minigfs_client2:		$(CORE_OBJS) minigfs_client2.o base64.o
+	$(CC) -o minigfs_client2 $(CORE_OBJS) minigfs_client2.o base64.o $(LDFLAGS_SV) $(LDFLAGS_CL)
 
 minigfs_master:		$(CORE_OBJS) minigfs_master.o base64.o
 	$(CC) -o minigfs_master $(CORE_OBJS) minigfs_master.o base64.o $(LDFLAGS_SV) $(LDFLAGS_CL)

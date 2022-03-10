@@ -27,7 +27,7 @@ Shadow_Replica::CommitAbort
   Json::Value myv;
 
   try {
-    std::cout << "calling NFS LookUp" << std::endl;
+    std::cout << "calling shadow replica CommitAbort" << std::endl;
 
     myv = myClient.CommitAbort("CommitAbort", "This is a Directory JSON string!",
 			       arg_chunk_index,

@@ -18,9 +18,9 @@ main()
   Json::Value result, result_P, result_A, result_B;
 
   //Step1-2
-  result = gfs_master.ObtainChunkURL("my_ecs251_file", "00000002", "0");
+  result = gfs_master.ObtainChunkURL("my_ecs251_file", "00000002", "1");
   while((result["status"]).asString() != "URLpassed"){
-    result = gfs_master.ObtainChunkURL("my_ecs251_file", "00000002", "0");
+    result = gfs_master.ObtainChunkURL("my_ecs251_file", "00000002", "1");
   }
 
   std::string url_primary = (result["primary"]).asString();
@@ -35,13 +35,13 @@ main()
   Shadow_Replica gfs_secondary_B
   { url_secondary_B, "1234567890", "Replica", "00000003" };
 
-  std::string my_chunk_data = { "ecs251 data" };
+  std::string my_chunk_data = { "ecs240 data" };
 
   while(true){
     //Step3
-    result_P = gfs_primary.PushChunk2Replica("my_ecs251_file", "00000002", "0", my_chunk_data);
-    result_A = gfs_secondary_A.PushChunk2Replica("my_ecs251_file", "00000002", "0", my_chunk_data);
-    result_B = gfs_secondary_B.PushChunk2Replica("my_ecs251_file", "00000002", "0", my_chunk_data);
+    result_P = gfs_primary.PushChunk2Replica("my_ecs251_file", "00000002", "1", my_chunk_data);
+    result_A = gfs_secondary_A.PushChunk2Replica("my_ecs251_file", "00000002", "1", my_chunk_data);
+    result_B = gfs_secondary_B.PushChunk2Replica("my_ecs251_file", "00000002", "1", my_chunk_data);
 
     //Step4
     if (((result_P["vote"]).asString() == "commit") &&
