@@ -35,6 +35,8 @@ main()
   Shadow_Replica gfs_secondary_B
   { url_secondary_B, "1234567890", "Replica", "00000003" };
 
+  std::cout << "chunk2" << std::endl;
+  Json::Value reading_test = gfs_secondary_A.dumpJ();
   std::string my_chunk_data = { "ecs240 data" };
 
   while(true){
@@ -42,16 +44,23 @@ main()
     result_P = gfs_primary.PushChunk2Replica("my_ecs251_file", "00000002", "1", my_chunk_data);
     result_A = gfs_secondary_A.PushChunk2Replica("my_ecs251_file", "00000002", "1", my_chunk_data);
     result_B = gfs_secondary_B.PushChunk2Replica("my_ecs251_file", "00000002", "1", my_chunk_data);
-
+      std::cout << "chunk2" << std::endl;
+    Json::Value reading_test = gfs_secondary_A.dumpJ();
     //Step4
     if (((result_P["vote"]).asString() == "commit") &&
       ((result_A["vote"]).asString() == "commit") &&
       ((result_B["vote"]).asString() == "commit"))
     {
       //Step6-7
-      result_P = gfs_primary.CommitAbort("my_ecs251_file", "00000002", "0", "commit");
-      result_A = gfs_secondary_A.CommitAbort("my_ecs251_file", "00000002", "0", "commit");
-      result_B = gfs_secondary_B.CommitAbort("my_ecs251_file", "00000002", "0", "commit");
+      result_P = gfs_primary.CommitAbort("my_ecs251_file", "00000002", "1", "commit");
+      result_A = gfs_secondary_A.CommitAbort("my_ecs251_file", "00000002", "1", "commit");
+
+
+        reading_test = gfs_secondary_B.dumpJ();
+
+      result_B = gfs_secondary_B.CommitAbort("my_ecs251_file", "00000002", "1", "commit");
+        std::cout << "chunk2" << std::endl;
+        reading_test = gfs_secondary_A.dumpJ();
       if(((result_P["status"]).asString() == "committed") &&
       ((result_A["status"]).asString() == "committed") &&
       ((result_B["status"]).asString() == "committed")) break;

@@ -45,6 +45,7 @@ main()
     result_A = gfs_secondary_A.PushChunk2Replica("my_ecs251_file", "00000002", "0", my_chunk_data);
     result_B = gfs_secondary_B.PushChunk2Replica("my_ecs251_file", "00000002", "0", my_chunk_data);
 
+      Json::Value reading_test = gfs_secondary_A.dumpJ();
 
     //Step4
     if (((result_P["vote"]).asString() == "commit") &&
@@ -53,6 +54,9 @@ main()
     {
       //Step6-7
       result_P = gfs_primary.CommitAbort("my_ecs251_file", "00000002", "0", "commit");
+
+        Json::Value reading_test = gfs_secondary_B.dumpJ();
+
       result_A = gfs_secondary_A.CommitAbort("my_ecs251_file", "00000002", "0", "commit");
       result_B = gfs_secondary_B.CommitAbort("my_ecs251_file", "00000002", "0", "commit");
       if(((result_P["status"]).asString() == "committed") &&
