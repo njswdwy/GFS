@@ -145,13 +145,13 @@ Myminigfs_Server::dumpJ(const std::string& action, const std::string& arguments,
 
   std::cout << "SFelixWu receiving dumpJ" << std::endl;
 
-  if (object_id != "00000002")
+  if (object_id != "00000001")
     {
-      result["status"] = "NFSERR_STALE";
+      result["status"] = "NFSERR_STALE onject_id is not 2";
     }
   else
     {
-      Json::Value *myv_ptr = mounted->dumpJ();
+      Json::Value *myv_ptr = replica->dumpJ();
       if (myv_ptr != NULL)
 	{
 	  result = *myv_ptr;

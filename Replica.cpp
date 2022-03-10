@@ -79,6 +79,8 @@ Replica::CommitAbort
           this->committed_data_chunk2.data = this->uncommitted_data_chunk2.data;
       }
       result["status"] = "committed";
+      result["Chunk1_data"] = (this->committed_data_chunk1).data;
+      result["Chunk2_data"] = (this->committed_data_chunk2).data;
   }
 
 //  {(this->committed_data).data  = (this->uncommitted_data).data;
@@ -106,6 +108,7 @@ Replica::PushChunk2Replica
   return result;
 }
 
+
 Json::Value *
 Replica::dumpJ()
 {
@@ -126,6 +129,24 @@ Replica::dumpJ()
       (*result_ptr)["chunk_index"] = this->chunk_index;
     }
 
+        if (this->committed_data_chunk1.data != "")
+    {
+        (*result_ptr)["chunk1_data"] = this->committed_data_chunk1.data;
+    } else {
+        (*result_ptr)["chunk1_data"] = "empty";
+    }
+
+    if (this->committed_data_chunk1.data != "")
+    {
+        (*result_ptr)["chunk2_data"] = this->committed_data_chunk2.data;
+    } else {
+        (*result_ptr)["chunk2_data"] = "empty";
+    }
+
+
+
+
+  std::cout << " Replica DumpJ\n";
   return result_ptr;
 }
 

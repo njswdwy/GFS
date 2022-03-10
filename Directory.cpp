@@ -60,7 +60,7 @@ Directory::Directory
   : Core { core_arg_host_url, core_arg_owner_vsID,
     core_arg_class_id, core_arg_object_id }
 {
-  std::cout << "a shadow has been created" << std::endl;
+  std::cout << "a shadow directory has been created" << std::endl;
   this->dirent_vector_ptr = NULL;
 }
 
@@ -193,6 +193,7 @@ Directory::dumpJ()
     {
       (*result_ptr)["fhandle"] = this->fhandle;
     }
+
 
   int i;
   if ((this->dirent_vector_ptr != NULL) && 

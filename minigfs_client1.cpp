@@ -35,6 +35,8 @@ main()
   Shadow_Replica gfs_secondary_B
   { url_secondary_B, "1234567890", "Replica", "00000003" };
 
+  Json::Value reading_test = gfs_primary.dumpJ();
+
   std::string my_chunk_data = { "ecs251 data" };
 
   while(true){
@@ -42,6 +44,7 @@ main()
     result_P = gfs_primary.PushChunk2Replica("my_ecs251_file", "00000002", "0", my_chunk_data);
     result_A = gfs_secondary_A.PushChunk2Replica("my_ecs251_file", "00000002", "0", my_chunk_data);
     result_B = gfs_secondary_B.PushChunk2Replica("my_ecs251_file", "00000002", "0", my_chunk_data);
+
 
     //Step4
     if (((result_P["vote"]).asString() == "commit") &&

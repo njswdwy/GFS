@@ -151,7 +151,7 @@ Myminigfs_Server::dumpJ(const std::string& action, const std::string& arguments,
     }
   else
     {
-      Json::Value *myv_ptr = mounted->dumpJ();
+      Json::Value *myv_ptr = replica->dumpJ();
       if (myv_ptr != NULL)
 	{
 	  result = *myv_ptr;

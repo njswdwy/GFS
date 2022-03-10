@@ -4,6 +4,7 @@
 // JSON RPC part
 #include <stdlib.h>
 #include "minigfs_client.h"
+
 #include <jsonrpccpp/client/connectors/httpclient.h>
 
 using namespace jsonrpc;
@@ -64,6 +65,7 @@ Shadow_Replica::PushChunk2Replica
   return myv;
 }
 
+
 Json::Value *
 Shadow_Replica::dumpJ
 ()
@@ -73,7 +75,7 @@ Shadow_Replica::dumpJ
   Json::Value myv;
 
   try {
-    std::cout << "calling NFS dumpJ" << std::endl;
+    std::cout << "calling GFS Reading" << std::endl;
 
     myv = myClient.dumpJ("dumpJ", "This is a Directory JSON string!",
 			 (this->class_id).c_str(), (this->host_url).c_str(),
@@ -85,6 +87,7 @@ Shadow_Replica::dumpJ
 
   Json::Value *myv_ptr = new Json::Value();
   (*myv_ptr) = myv;
+
   return myv_ptr;
 }
 

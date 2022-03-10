@@ -14,7 +14,7 @@ CFLAGS = -g -I/usr/include/jsoncpp
 # CFLAGS = -O3
 
 # the following, RPCG, are JSONRPC generated files
-RPCG_INCS =	minigfs_client1.h minigfs_client2.h minigfs_server.h
+RPCG_INCS =	minigfs_client.h minigfs_server.h
 
 # all files inherited from Core objects plus the RPCG stuff
 CORE_INCS =	Core.h Directory.h Shadow_Directory.h Replica.h Shadow_Replica.h $(RPCG_INCS)
@@ -33,11 +33,8 @@ all: 	minigfs_client1 minigfs_client2 minigfs_master minigfs_primary minigfs_sec
 
 # why do I need this line?
 
-minigfs_client1.h:	minigfs.json
-	jsonrpcstub minigfs.json --cpp-server=minigfs_Server --cpp-client=minigfs_Client1
-
-minigfs_client2.h:	minigfs.json
-	jsonrpcstub minigfs.json --cpp-server=minigfs_Server --cpp-client=minigfs_Client2
+minigfs_client.h:	minigfs.json
+	jsonrpcstub minigfs.json --cpp-server=minigfs_Server --cpp-client=minigfs_Client
 
 minigfs_server.h:	minigfs.json
 	jsonrpcstub minigfs.json --cpp-server=minigfs_Server --cpp-client=minigfs_Client

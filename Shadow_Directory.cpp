@@ -4,6 +4,7 @@
 // JSON RPC part
 #include <stdlib.h>
 #include "minigfs_client.h"
+
 #include <jsonrpccpp/client/connectors/httpclient.h>
 
 using namespace jsonrpc;
