@@ -25,11 +25,11 @@ LDFLAGS_SV = 	-ljsoncpp -lmicrohttpd -ljsonrpccpp-common -ljsonrpccpp-server
 LDFLAGS_CL = 	-ljsoncpp -lcurl -ljsonrpccpp-common -ljsonrpccpp-client
 
 # executable
-EXE_FILES =	minigfs_client1 minigfs_client2  minigfs_master minigfs_primary minigfs_secondary_A minigfs_secondary_B
+EXE_FILES =	minigfs_client1 minigfs_client2 minigfs_read minigfs_master minigfs_primary minigfs_secondary_A minigfs_secondary_B
 
 # rules
 
-all: 	minigfs_client1 minigfs_client2 minigfs_master minigfs_primary minigfs_secondary_A minigfs_secondary_B
+all: 	minigfs_client1 minigfs_client2 minigfs_master minigfs_primary minigfs_secondary_A minigfs_secondary_B minigfs_read
 
 # why do I need this line?
 
@@ -75,6 +75,9 @@ minigfs_secondary_A.o:	minigfs_secondary_A.cpp $(CORE_INCS)
 minigfs_secondary_B.o:	minigfs_secondary_B.cpp $(CORE_INCS)
 	$(CC) -c $(CFLAGS) minigfs_secondary_B.cpp
 
+minigfs_read.o: minigfs_read.cpp $(CORE_INCS)
+	$(CC) -c $(CFLAGS) minigfs_read.cpp
+
 minigfs_client1:		$(CORE_OBJS) minigfs_client1.o base64.o
 	$(CC) -o minigfs_client1 $(CORE_OBJS) minigfs_client1.o base64.o $(LDFLAGS_SV) $(LDFLAGS_CL)
 
@@ -92,6 +95,9 @@ minigfs_secondary_A:	$(CORE_OBJS) minigfs_secondary_A.o base64.o
 
 minigfs_secondary_B:	$(CORE_OBJS) minigfs_secondary_B.o base64.o
 	$(CC) -o minigfs_secondary_B $(CORE_OBJS) minigfs_secondary_B.o base64.o $(LDFLAGS_SV) $(LDFLAGS_CL)
+
+minigfs_read: $(CORE_OBJS) minigfs_read.o base64.o
+	$(CC) -o minigfs_read $(CORE_OBJS) minigfs_read.o base64.o $(LDFLAGS_SV) $(LDFLAGS_CL)
 
 clean:
 	rm -f *.o *~ core $(EXE_FILES) $(RPCG_INCS)
