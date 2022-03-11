@@ -143,7 +143,7 @@ Myminigfs_Server::dumpJ(const std::string& action, const std::string& arguments,
   Json::Value result;
   std::cout << action << " " << arguments << " " << owner_vsID << std::endl;
 
-  std::cout << "SFelixWu receiving dumpJ" << std::endl;
+  std::cout << "Secondary_B receiving dumpJ" << std::endl;
 
   if (object_id != "00000003")
     {

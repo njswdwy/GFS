@@ -1,5 +1,24 @@
 
 #include "Replica.h"
+// for Json::value
+#include <json/json.h>
+#include <json/reader.h>
+#include <json/writer.h>
+#include <json/value.h>
+#include <string>
+
+// for JsonRPCCPP
+#include <iostream>
+#include "minigfs_server.h"
+#include <jsonrpccpp/server/connectors/httpserver.h>
+#include <stdio.h>
+
+// ecs251
+#include "Core.h"
+#include "Directory.h"
+#include "Replica.h"
+#include "Shadow_Directory.h"
+#include <time.h>
 
 Chunk::Chunk()
 {
